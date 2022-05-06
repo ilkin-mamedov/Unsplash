@@ -25,7 +25,9 @@
                         <viewLayoutGuide key="safeArea" id="U4A-Nr-pRV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6iS-ua-suW" firstAttribute="leading" secondItem="sM0-Qy-XOy" secondAttribute="leading" id="8A0-ua-wSZ"/>
                             <constraint firstItem="U4A-Nr-pRV" firstAttribute="trailing" secondItem="6iS-ua-suW" secondAttribute="trailing" id="E4U-v3-ejZ"/>
+                            <constraint firstAttribute="trailing" secondItem="6iS-ua-suW" secondAttribute="trailing" id="HIp-gf-aD2"/>
                             <constraint firstItem="6iS-ua-suW" firstAttribute="top" secondItem="U4A-Nr-pRV" secondAttribute="top" id="JaI-zW-afr"/>
                             <constraint firstItem="U4A-Nr-pRV" firstAttribute="bottom" secondItem="6iS-ua-suW" secondAttribute="bottom" id="KRd-Je-Esl"/>
                             <constraint firstItem="6iS-ua-suW" firstAttribute="leading" secondItem="U4A-Nr-pRV" secondAttribute="leading" id="a1g-KO-Sw0"/>
@@ -39,7 +41,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AIk-XL-XWj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1351" y="273"/>
+            <point key="canvasLocation" x="1350.7246376811595" y="272.54464285714283"/>
         </scene>
         <!--Photos-->
         <scene sceneID="yox-fZ-j3w">
@@ -72,8 +74,10 @@
                             <constraint firstItem="hB9-Zw-Pa6" firstAttribute="centerX" secondItem="Pof-qA-Opt" secondAttribute="centerX" id="31A-y3-62c"/>
                             <constraint firstItem="tV3-UI-lhk" firstAttribute="leading" secondItem="6Hu-Te-9ru" secondAttribute="leading" id="3ow-0N-d5a"/>
                             <constraint firstItem="KVt-ZQ-Rvb" firstAttribute="top" secondItem="hB9-Zw-Pa6" secondAttribute="bottom" id="6tE-qM-9wb"/>
+                            <constraint firstItem="tV3-UI-lhk" firstAttribute="leading" secondItem="Pof-qA-Opt" secondAttribute="leading" id="EU0-Za-Voc"/>
                             <constraint firstItem="6Hu-Te-9ru" firstAttribute="trailing" secondItem="tV3-UI-lhk" secondAttribute="trailing" id="K6E-9a-MSE"/>
                             <constraint firstItem="6Hu-Te-9ru" firstAttribute="bottom" secondItem="tV3-UI-lhk" secondAttribute="bottom" id="O0O-64-JNt"/>
+                            <constraint firstAttribute="trailing" secondItem="tV3-UI-lhk" secondAttribute="trailing" id="V9E-q9-7dh"/>
                             <constraint firstItem="KVt-ZQ-Rvb" firstAttribute="leading" secondItem="6Hu-Te-9ru" secondAttribute="leading" id="XIJ-fk-bbi"/>
                             <constraint firstItem="KVt-ZQ-Rvb" firstAttribute="trailing" secondItem="6Hu-Te-9ru" secondAttribute="trailing" id="cw8-M9-VFE"/>
                             <constraint firstItem="hB9-Zw-Pa6" firstAttribute="top" secondItem="6Hu-Te-9ru" secondAttribute="top" id="j11-Nl-KRI"/>

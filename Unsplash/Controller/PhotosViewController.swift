@@ -1,6 +1,4 @@
 import UIKit
-import Alamofire
-import Contacts
 import SDWebImage
 
 class PhotosViewController: UIViewController {
@@ -8,15 +6,15 @@ class PhotosViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    private var photos: [Photo] = []
-    
     private var id = ""
-    
     private let refreshControl = UIRefreshControl()
+    private var photosManager = PhotosManager()
+    private var photos: [Photo] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        photosManager.delegate = self
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
@@ -28,55 +26,36 @@ class PhotosViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(self.loadPhotos), for: .valueChanged)
         tableView.addSubview(refreshControl)
         
-        loadPhotos(isSearch: false)
+        loadPhotos()
     }
     
-    @objc func loadPhotos(isSearch: Bool) {
-        var url = ""
-        
-        for index in 1...10 {
-            if isSearch {
-                url = "https://api.unsplash.com/search/photos?per_page=30&page\(index)&query=\(searchBar.text!.replacingOccurrences(of: " ", with: "+"))&client_id=\(K.ACCESS_KEY)"
-            } else {
-                url = "https://api.unsplash.com/photos?per_page=30&page\(index)&client_id=\(K.ACCESS_KEY)"
-            }
-            
-            AF.request(url).response { response in
-                if let result = response.response {
-                    if result.statusCode == 200 {
-                        if let safeData = response.data {
-                            self.parseJSON(safeData, isSearch)
-                        }
-                    }
-                }
-            }
-        }
+    @objc func loadPhotos() {
+        photosManager.fetchPhotos()
+        tableView.reloadData()
         refreshControl.endRefreshing()
-    }
-    
-    private func parseJSON(_ data: Data, _ isSearch: Bool) {
-        let decoder = JSONDecoder()
-        
-        do {
-            if isSearch {
-                let searchResults = try decoder.decode(Results.self, from: data)
-                photos = searchResults.results
-            } else {
-                photos = try decoder.decode([Photo].self, from: data)
-            }
-            tableView.reloadData()
-        } catch {
-            print(error)
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetails" {
             let navigationContoller = segue.destination as! UINavigationController
-            let detailsViewController = navigationContoller.topViewController as! DetailsViewController
+            let detailViewController = navigationContoller.topViewController as! DetailViewController
 
-            detailsViewController.id = id
+            detailViewController.id = id
         }
+    }
+}
+
+extension PhotosViewController: PhotosManagerDelegate {
+    func didUpdatePhotos(_ photosManager: PhotosManager, _ photos: [Photo]) {
+        self.photos = photos
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func didFailWithError(_ error: Error) {
+        print(error)
     }
 }
 
@@ -106,20 +85,20 @@ extension PhotosViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension PhotosViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        loadPhotos(isSearch: true)
+        photosManager.fetchPhotos(search: searchBar.text!)
         
-        tableView.reloadData()
         DispatchQueue.main.async {
+            self.tableView.reloadData()
             searchBar.resignFirstResponder()
         }
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
-            loadPhotos(isSearch: false)
+            photosManager.fetchPhotos()
             
-            tableView.reloadData()
             DispatchQueue.main.async {
+                self.tableView.reloadData()
                 searchBar.resignFirstResponder()
             }
         }

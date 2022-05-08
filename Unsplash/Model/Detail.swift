@@ -1,5 +1,4 @@
 import Foundation
-import RealmSwift
 
 struct Detail: Codable {
     let id: String

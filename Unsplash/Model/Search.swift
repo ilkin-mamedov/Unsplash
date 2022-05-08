@@ -1,5 +1,5 @@
 import Foundation
 
-struct Results: Codable {
+struct Search: Codable {
     let results: [Photo]
 }

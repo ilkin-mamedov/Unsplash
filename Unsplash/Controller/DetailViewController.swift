@@ -1,18 +1,20 @@
 import UIKit
 import Alamofire
 import SDWebImage
+import Lottie
 
 var documentInteractionController: UIDocumentInteractionController!
 
 class DetailViewController: UIViewController {
     
-    @IBOutlet weak var favoriteBarItem: UIBarButtonItem!
+    @IBOutlet weak var favoriteBarButton: UIBarButtonItem!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var createdLabel: UILabel!
     @IBOutlet weak var downloadsLabel: UILabel!
+    private var favoriteAnimationView: AnimationView?
     
     public var id = ""
     private var downloadURL = ""
@@ -28,12 +30,25 @@ class DetailViewController: UIViewController {
         
         detailManager.fetchDetail(with: id)
         
+        favoriteAnimationView = AnimationView(name: "favorite")
+        favoriteAnimationView?.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        favoriteAnimationView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(favoritePressed)))
+        
+        favoriteBarButton.customView = favoriteAnimationView
+    
         if detailManager.isFavorited(with: id) {
-            favoriteBarItem.image = UIImage(systemName: "heart.fill")
+            favoriteAnimationView?.animationSpeed = 3
+            favoriteAnimationView?.play()
+        } else {
+            favoriteAnimationView?.play(fromFrame: 0, toFrame: 0.1, loopMode: .none, completion: nil)
         }
     }
     
-    @IBAction func favoritePressed(_ sender: UIBarButtonItem) {
+    @IBAction func favoriteBarButtonPressed(_ sender: UIBarButtonItem) {
+        favoritePressed()
+    }
+    
+    @objc func favoritePressed() {
         if detailManager.isFavorited(with: id) {
             let alert = UIAlertController(title: "Are you sure you want to delete from favorites?", message: "", preferredStyle: .alert)
             
@@ -45,13 +60,14 @@ class DetailViewController: UIViewController {
             
             alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: {(_: UIAlertAction!) in
                 self.detailManager.deleteFromFavorites(with: self.id)
-                sender.image = UIImage(systemName: "heart")
+                self.favoriteAnimationView?.play(fromFrame: 0, toFrame: 0.1, loopMode: .none, completion: nil)
             }))
             
             self.present(alert, animated: true, completion: nil)
         } else {
+            favoriteAnimationView?.animationSpeed = 1.5
+            favoriteAnimationView?.play()
             detailManager.addToFavorites(with: id)
-            sender.image = UIImage(systemName: "heart.fill")
         }
     }
     

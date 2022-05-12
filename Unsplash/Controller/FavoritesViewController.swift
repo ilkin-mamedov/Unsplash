@@ -33,12 +33,28 @@ class FavoritesViewController: UIViewController {
     }
     
     @objc func loadFavorites() {
-        favorites.removeAll()
-        for i in realm.objects(Favorite.self) {
-            favoriteManager.fetchFavorite(with: i.id!)
+        if NetworkReachabilityManager()!.isReachable {
+            favorites.removeAll()
+            for i in realm.objects(Favorite.self) {
+                favoriteManager.fetchFavorite(with: i.id!)
+            }
+            tableView.reloadData()
+        } else {
+            internetConnectionAlert()
         }
-        tableView.reloadData()
         refreshControl.endRefreshing()
+    }
+    
+    private func internetConnectionAlert() {
+        let alert = UIAlertController(title: "You are offline!", message: "Please, check your internet connection and try again.", preferredStyle: .alert)
+        
+        alert.view.tintColor = UIColor(named: "AccentColor")
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            alert.dismiss(animated: true)
+        }))
+        
+        present(alert, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -83,8 +99,12 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        id = favorites[indexPath.row].id
-        performSegue(withIdentifier: "showDetails", sender: self)
+        if NetworkReachabilityManager()!.isReachable {
+            id = favorites[indexPath.row].id
+            performSegue(withIdentifier: "showDetails", sender: self)
+        } else {
+            internetConnectionAlert()
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

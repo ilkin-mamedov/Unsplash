@@ -76,19 +76,35 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func downloadPressed(_ sender: UIButton) {
-        let destination: DownloadRequest.Destination = { _, _ in
-            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            let fileURL = documentsURL.appendingPathComponent("\(self.id).png")
-            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
-        }
-
-        AF.download(downloadURL, to: destination).response { response in
-            if response.error == nil, let imagePath = response.fileURL?.path {
-                documentInteractionController = UIDocumentInteractionController()
-                documentInteractionController.url = URL(fileURLWithPath: imagePath)
-                documentInteractionController.presentOptionsMenu(from: sender.bounds, in: sender, animated: true)
+        if NetworkReachabilityManager()!.isReachable {
+            let destination: DownloadRequest.Destination = { _, _ in
+                let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                let fileURL = documentsURL.appendingPathComponent("\(self.id).png")
+                return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
             }
+
+            AF.download(downloadURL, to: destination).response { response in
+                if response.error == nil, let imagePath = response.fileURL?.path {
+                    documentInteractionController = UIDocumentInteractionController()
+                    documentInteractionController.url = URL(fileURLWithPath: imagePath)
+                    documentInteractionController.presentOptionsMenu(from: sender.bounds, in: sender, animated: true)
+                }
+            }
+        } else {
+            internetConnectionAlert()
         }
+    }
+    
+    private func internetConnectionAlert() {
+        let alert = UIAlertController(title: "You are offline!", message: "Please, check your internet connection and try again.", preferredStyle: .alert)
+        
+        alert.view.tintColor = UIColor(named: "AccentColor")
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            alert.dismiss(animated: true)
+        }))
+        
+        present(alert, animated: true, completion: nil)
     }
 }
 

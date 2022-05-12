@@ -118,9 +118,9 @@
 				3BBCF23628245911003766A0 /* Controller */,
 				3BBCF23B28245BBF003766A0 /* Constants.swift */,
 				3BBCF22C282452B8003766A0 /* LaunchScreen.storyboard */,
+				3BE693B9282AAE1C00E89C5B /* favorite.json */,
 				3BBCF22A282452B8003766A0 /* Assets.xcassets */,
 				3BBCF22F282452B8003766A0 /* Info.plist */,
-				3BE693B9282AAE1C00E89C5B /* favorite.json */,
 			);
 			path = Unsplash;
 			sourceTree = "<group>";

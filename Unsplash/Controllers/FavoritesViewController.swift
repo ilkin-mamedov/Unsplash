@@ -2,6 +2,7 @@ import UIKit
 import Alamofire
 import SDWebImage
 import RealmSwift
+import SPAlert
 
 class FavoritesViewController: UIViewController {
 
@@ -40,21 +41,9 @@ class FavoritesViewController: UIViewController {
             }
             tableView.reloadData()
         } else {
-            internetConnectionAlert()
+            SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
         }
         refreshControl.endRefreshing()
-    }
-    
-    private func internetConnectionAlert() {
-        let alert = UIAlertController(title: "You are offline!", message: "Please, check your internet connection and try again.", preferredStyle: .alert)
-        
-        alert.view.tintColor = UIColor(named: "AccentColor")
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            alert.dismiss(animated: true)
-        }))
-        
-        present(alert, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -103,7 +92,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
             id = favorites[indexPath.row].id
             performSegue(withIdentifier: "showDetails", sender: self)
         } else {
-            internetConnectionAlert()
+            SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

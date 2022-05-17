@@ -7,5 +7,6 @@ target 'Unsplash' do
   pod 'SDWebImage'
   pod 'RealmSwift'
   pod 'lottie-ios'
+  pod 'SPAlert'
 
 end

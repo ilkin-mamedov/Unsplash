@@ -1,6 +1,7 @@
 import UIKit
 import Alamofire
 import SDWebImage
+import SPAlert
 
 class PhotosViewController: UIViewController {
     
@@ -35,21 +36,9 @@ class PhotosViewController: UIViewController {
             photosManager.fetchPhotos()
             tableView.reloadData()
         } else {
-            internetConnectionAlert()
+            SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
         }
         refreshControl.endRefreshing()
-    }
-    
-    private func internetConnectionAlert() {
-        let alert = UIAlertController(title: "You are offline!", message: "Please, check your internet connection and try again.", preferredStyle: .alert)
-        
-        alert.view.tintColor = UIColor(named: "AccentColor")
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            alert.dismiss(animated: true)
-        }))
-        
-        present(alert, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -98,7 +87,7 @@ extension PhotosViewController: UITableViewDataSource, UITableViewDelegate {
             id = photos[indexPath.row].id
             performSegue(withIdentifier: "showDetails", sender: self)
         } else {
-            internetConnectionAlert()
+            SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -110,7 +99,7 @@ extension PhotosViewController: UISearchBarDelegate {
         if NetworkReachabilityManager()!.isReachable {
             photosManager.fetchPhotos(search: searchBar.text!)
         } else {
-            internetConnectionAlert()
+            SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
         }
         
         DispatchQueue.main.async {

@@ -9,12 +9,14 @@ PODS:
   - SDWebImage (5.12.5):
     - SDWebImage/Core (= 5.12.5)
   - SDWebImage/Core (5.12.5)
+  - SPAlert (4.2.0)
 
 DEPENDENCIES:
   - Alamofire
   - lottie-ios
   - RealmSwift
   - SDWebImage
+  - SPAlert
 
 SPEC REPOS:
   trunk:
@@ -23,6 +25,7 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SDWebImage
+    - SPAlert
 
 SPEC CHECKSUMS:
   Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
@@ -30,7 +33,8 @@ SPEC CHECKSUMS:
   Realm: 1a6e9b4f6983711655d8c0bcb6d2d29c3afbb1f3
   RealmSwift: e72669550d27082aa4fad5d176f5076cfe806245
   SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
+  SPAlert: 735da1f16a887e294719217572ce1f936d8c8782
 
-PODFILE CHECKSUM: 386cbff797c7bce4405c746efbec9af04fc8ddd9
+PODFILE CHECKSUM: 1817ae93ce6766bf5ba4095292303a86243b409c
 
 COCOAPODS: 1.11.2

@@ -2,6 +2,7 @@ import UIKit
 import Alamofire
 import SDWebImage
 import Lottie
+import SPAlert
 
 var documentInteractionController: UIDocumentInteractionController!
 
@@ -14,6 +15,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var createdLabel: UILabel!
     @IBOutlet weak var downloadsLabel: UILabel!
+    
     private var favoriteAnimationView: AnimationView?
     
     public var id = ""
@@ -68,6 +70,7 @@ class DetailViewController: UIViewController {
             favoriteAnimationView?.animationSpeed = 1.5
             favoriteAnimationView?.play()
             detailManager.addToFavorites(with: id)
+            SPAlert.present(title: "Added to Favorites", preset: .heart)
         }
     }
     
@@ -91,20 +94,8 @@ class DetailViewController: UIViewController {
                 }
             }
         } else {
-            internetConnectionAlert()
+            SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
         }
-    }
-    
-    private func internetConnectionAlert() {
-        let alert = UIAlertController(title: "You are offline!", message: "Please, check your internet connection and try again.", preferredStyle: .alert)
-        
-        alert.view.tintColor = UIColor(named: "AccentColor")
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            alert.dismiss(animated: true)
-        }))
-        
-        present(alert, animated: true, completion: nil)
     }
 }
 

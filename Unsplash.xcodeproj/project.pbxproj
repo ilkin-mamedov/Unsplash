@@ -113,9 +113,10 @@
 				3BBCF25428254783003766A0 /* Unsplash.entitlements */,
 				3BBCF221282452B6003766A0 /* AppDelegate.swift */,
 				3BBCF223282452B6003766A0 /* SceneDelegate.swift */,
-				3BBCF23F28245D7B003766A0 /* Model */,
-				3BBCF2352824590B003766A0 /* View */,
-				3BBCF23628245911003766A0 /* Controller */,
+				3BFD040228273A6A00E8CD27 /* Managers */,
+				3BBCF23F28245D7B003766A0 /* Models */,
+				3BBCF2352824590B003766A0 /* Views */,
+				3BBCF23628245911003766A0 /* Controllers */,
 				3BBCF23B28245BBF003766A0 /* Constants.swift */,
 				3BBCF22C282452B8003766A0 /* LaunchScreen.storyboard */,
 				3BE693B9282AAE1C00E89C5B /* favorite.json */,
@@ -125,17 +126,17 @@
 			path = Unsplash;
 			sourceTree = "<group>";
 		};
-		3BBCF2352824590B003766A0 /* View */ = {
+		3BBCF2352824590B003766A0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				3BBCF227282452B6003766A0 /* Main.storyboard */,
 				3BBCF2402824675B003766A0 /* PhotoCell.swift */,
 				3BBCF2412824675B003766A0 /* PhotoCell.xib */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		3BBCF23628245911003766A0 /* Controller */ = {
+		3BBCF23628245911003766A0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				3BBCF225282452B6003766A0 /* ViewController.swift */,
@@ -143,22 +144,21 @@
 				3BBCF2392824594A003766A0 /* FavoritesViewController.swift */,
 				3BBCF24628248135003766A0 /* DetailViewController.swift */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		3BBCF23F28245D7B003766A0 /* Model */ = {
+		3BBCF23F28245D7B003766A0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				3BBCF23D28245D65003766A0 /* Photo.swift */,
 				3BBCF24428247472003766A0 /* Search.swift */,
 				3BBCF24C2825261B003766A0 /* Favorite.swift */,
 				3BBCF2482824875E003766A0 /* Detail.swift */,
-				3BFD040228273A6A00E8CD27 /* Manager */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		3BFD040228273A6A00E8CD27 /* Manager */ = {
+		3BFD040228273A6A00E8CD27 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				3BFD040028271B3A00E8CD27 /* PhotosManagerDelegate.swift */,
@@ -168,7 +168,7 @@
 				3B405AC92827E42F00DE6328 /* FavoriteManager.swift */,
 				3B405AC52827D87900DE6328 /* DetailManager.swift */,
 			);
-			path = Manager;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		977D96AD7EA895F2DF7196BC /* Frameworks */ = {

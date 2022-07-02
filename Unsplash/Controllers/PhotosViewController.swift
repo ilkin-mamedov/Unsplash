@@ -20,7 +20,7 @@ class PhotosViewController: UIViewController {
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 270
+        tableView.rowHeight = 250
         
         tableView.register(UINib(nibName: "PhotoCell", bundle: nil), forCellReuseIdentifier: "photoCell")
         
@@ -78,6 +78,13 @@ extension PhotosViewController: UITableViewDataSource, UITableViewDelegate {
         cell.photoImageView.sd_setImage(with: URL(string: photo.urls.full))
         cell.userImageView.sd_setImage(with: URL(string: photo.user.profile_image.large))
         cell.nameLabel.text = photo.user.name
+        
+        cell.photoImageView.layer.sublayers?.removeAll()
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width - 20, height: 250)
+        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradient.locations = [0.6, 1.0]
+        cell.photoImageView.layer.insertSublayer(gradient, at: 0)
         
         return cell
     }

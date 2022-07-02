@@ -2,6 +2,7 @@ import UIKit
 
 class PhotoCell: UITableViewCell {
 
+    @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -9,8 +10,9 @@ class PhotoCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        bgView.layer.cornerRadius = 15
+        photoImageView.layer.cornerRadius = 15
         userImageView.layer.cornerRadius = 25
-        userImageView.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

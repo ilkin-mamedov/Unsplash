@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6iS-ua-suW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6iS-ua-suW">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
@@ -41,7 +41,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AIk-XL-XWj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1350.7246376811595" y="272.54464285714283"/>
+            <point key="canvasLocation" x="-852" y="1367"/>
         </scene>
         <!--Photos-->
         <scene sceneID="yox-fZ-j3w">
@@ -63,7 +63,7 @@
                                 <color key="tintColor" name="AccentColor"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tV3-UI-lhk">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tV3-UI-lhk">
                                 <rect key="frame" x="0.0" y="145" width="414" height="668"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
@@ -93,7 +93,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="foX-sc-XNY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="583" y="-388"/>
+            <point key="canvasLocation" x="433" y="644"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="bfs-ya-76A">
@@ -146,7 +146,7 @@
                                                     <constraint firstAttribute="width" constant="30" id="eo7-lR-bFU"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created: -" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJP-cl-Ix8">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created at" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJP-cl-Ix8">
                                                 <rect key="frame" x="30" y="0.0" width="364" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -174,25 +174,44 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="inc-z7-p38">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bG6-Dl-zmr">
                                 <rect key="frame" x="10" y="782" width="394" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="inc-z7-p38">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="AA7-1z-wt8"/>
+                                        </constraints>
+                                        <color key="tintColor" name="AccentColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Button">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="Download"/>
+                                            </attributedString>
+                                        </state>
+                                        <buttonConfiguration key="configuration" style="filled" title="Download">
+                                            <color key="baseForegroundColor" name="TextColor"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="downloadPressed:" destination="lef-6W-Bta" eventType="touchUpInside" id="jUH-Po-sNI"/>
+                                        </connections>
+                                    </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="mpX-G8-r3i">
+                                        <rect key="frame" x="187" y="15" width="20" height="20"/>
+                                        <color key="color" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="AA7-1z-wt8"/>
+                                    <constraint firstItem="inc-z7-p38" firstAttribute="leading" secondItem="bG6-Dl-zmr" secondAttribute="leading" id="OEz-7h-5zi"/>
+                                    <constraint firstAttribute="height" constant="50" id="SkA-0Z-zUA"/>
+                                    <constraint firstItem="mpX-G8-r3i" firstAttribute="centerX" secondItem="bG6-Dl-zmr" secondAttribute="centerX" id="U8W-lG-rb0"/>
+                                    <constraint firstAttribute="bottom" secondItem="inc-z7-p38" secondAttribute="bottom" id="b15-em-Dny"/>
+                                    <constraint firstAttribute="trailing" secondItem="inc-z7-p38" secondAttribute="trailing" id="jp9-zU-6v4"/>
+                                    <constraint firstItem="mpX-G8-r3i" firstAttribute="centerY" secondItem="bG6-Dl-zmr" secondAttribute="centerY" id="mJH-Bs-gTu"/>
+                                    <constraint firstItem="inc-z7-p38" firstAttribute="top" secondItem="bG6-Dl-zmr" secondAttribute="top" id="vE8-rP-Zn2"/>
                                 </constraints>
-                                <color key="tintColor" name="AccentColor"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Button">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Download"/>
-                                    </attributedString>
-                                </state>
-                                <buttonConfiguration key="configuration" style="filled" title="Download">
-                                    <color key="baseForegroundColor" name="TextColor"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="downloadPressed:" destination="lef-6W-Bta" eventType="touchUpInside" id="jUH-Po-sNI"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="x5t-i0-bxr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -201,15 +220,15 @@
                             <constraint firstItem="x5t-i0-bxr" firstAttribute="trailing" secondItem="mY8-7H-uAK" secondAttribute="trailing" constant="10" id="Alw-sI-j8O"/>
                             <constraint firstItem="buE-8S-GGk" firstAttribute="top" secondItem="VGe-Ot-q1L" secondAttribute="top" id="BT5-4T-nI2"/>
                             <constraint firstItem="mY8-7H-uAK" firstAttribute="leading" secondItem="Xfy-r4-uEy" secondAttribute="trailing" constant="10" id="HQ9-yl-Y0S"/>
-                            <constraint firstItem="x5t-i0-bxr" firstAttribute="trailing" secondItem="inc-z7-p38" secondAttribute="trailing" constant="10" id="IGH-kc-AZt"/>
-                            <constraint firstItem="inc-z7-p38" firstAttribute="leading" secondItem="x5t-i0-bxr" secondAttribute="leading" constant="10" id="JX8-Cg-cCM"/>
                             <constraint firstItem="tQS-eW-Ep1" firstAttribute="leading" secondItem="x5t-i0-bxr" secondAttribute="leading" constant="10" id="Kdm-VO-GzK"/>
-                            <constraint firstItem="x5t-i0-bxr" firstAttribute="bottom" secondItem="inc-z7-p38" secondAttribute="bottom" constant="10" id="Q8O-nQ-BUn"/>
+                            <constraint firstItem="bG6-Dl-zmr" firstAttribute="leading" secondItem="x5t-i0-bxr" secondAttribute="leading" constant="10" id="Lrx-mB-NCa"/>
                             <constraint firstItem="tQS-eW-Ep1" firstAttribute="top" secondItem="Xfy-r4-uEy" secondAttribute="bottom" constant="20" id="Tcc-DA-g7J"/>
                             <constraint firstItem="mY8-7H-uAK" firstAttribute="top" secondItem="buE-8S-GGk" secondAttribute="bottom" constant="14" id="UsO-uB-A9r"/>
+                            <constraint firstItem="x5t-i0-bxr" firstAttribute="bottom" secondItem="bG6-Dl-zmr" secondAttribute="bottom" constant="10" id="aot-1H-078"/>
                             <constraint firstItem="buE-8S-GGk" firstAttribute="trailing" secondItem="x5t-i0-bxr" secondAttribute="trailing" id="cIY-r3-9Ed"/>
                             <constraint firstItem="x5t-i0-bxr" firstAttribute="trailing" secondItem="tQS-eW-Ep1" secondAttribute="trailing" constant="10" id="dd8-hs-fLB"/>
                             <constraint firstItem="buE-8S-GGk" firstAttribute="leading" secondItem="x5t-i0-bxr" secondAttribute="leading" id="ihX-YU-j4A"/>
+                            <constraint firstItem="x5t-i0-bxr" firstAttribute="trailing" secondItem="bG6-Dl-zmr" secondAttribute="trailing" constant="10" id="vnK-NL-Bsu"/>
                             <constraint firstItem="Xfy-r4-uEy" firstAttribute="leading" secondItem="x5t-i0-bxr" secondAttribute="leading" constant="10" id="wuD-yG-nTS"/>
                         </constraints>
                     </view>
@@ -231,6 +250,7 @@
                         <outlet property="createdLabel" destination="yJP-cl-Ix8" id="KVf-DX-Uio"/>
                         <outlet property="downloadsLabel" destination="CtJ-OY-UyT" id="9LG-DS-KkZ"/>
                         <outlet property="favoriteBarButton" destination="VLH-Ro-Tdf" id="wsk-fu-hfA"/>
+                        <outlet property="indicatorView" destination="mpX-G8-r3i" id="7r2-q8-d7q"/>
                         <outlet property="locationLabel" destination="ngZ-oc-EYO" id="Y6J-iI-ym6"/>
                         <outlet property="nameLabel" destination="9NC-Ot-yWM" id="lIr-TE-m25"/>
                         <outlet property="photoImageView" destination="buE-8S-GGk" id="jgS-uV-CCD"/>
@@ -239,7 +259,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Z2-ki-zda" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2149" y="-388"/>
+            <point key="canvasLocation" x="432" y="2085"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="S6e-7O-B0u">
@@ -276,7 +296,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQb-D1-zZQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="582.60869565217399" y="272.54464285714283"/>
+            <point key="canvasLocation" x="-852" y="644"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Bxh-IG-xJH">
@@ -295,11 +315,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5h8-bb-SxA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1351" y="-388"/>
+            <point key="canvasLocation" x="432" y="1367"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XYn-QY-roF"/>
+        <segue reference="5Z1-27-r4w"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Logo" width="333" height="333"/>

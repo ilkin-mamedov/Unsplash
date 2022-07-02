@@ -15,6 +15,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var createdLabel: UILabel!
     @IBOutlet weak var downloadsLabel: UILabel!
+    @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
     private var favoriteAnimationView: AnimationView?
     
@@ -44,6 +45,8 @@ class DetailViewController: UIViewController {
         } else {
             favoriteAnimationView?.play(fromFrame: 0, toFrame: 0.1, loopMode: .none, completion: nil)
         }
+        
+        indicatorView.isHidden = true
     }
     
     @IBAction func favoriteBarButtonPressed(_ sender: UIBarButtonItem) {
@@ -80,6 +83,9 @@ class DetailViewController: UIViewController {
     
     @IBAction func downloadPressed(_ sender: UIButton) {
         if NetworkReachabilityManager()!.isReachable {
+            sender.setTitle("", for: .normal)
+            indicatorView.isHidden = false
+            indicatorView.startAnimating()
             let destination: DownloadRequest.Destination = { _, _ in
                 let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
                 let fileURL = documentsURL.appendingPathComponent("\(self.id).png")
@@ -88,6 +94,9 @@ class DetailViewController: UIViewController {
 
             AF.download(downloadURL, to: destination).response { response in
                 if response.error == nil, let imagePath = response.fileURL?.path {
+                    sender.setTitle("Download", for: .normal)
+                    self.indicatorView.isHidden = true
+                    self.indicatorView.stopAnimating()
                     documentInteractionController = UIDocumentInteractionController()
                     documentInteractionController.url = URL(fileURLWithPath: imagePath)
                     documentInteractionController.presentOptionsMenu(from: sender.bounds, in: sender, animated: true)

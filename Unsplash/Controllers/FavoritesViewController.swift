@@ -7,6 +7,7 @@ import SPAlert
 class FavoritesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var nothingLabel: UILabel!
     
     private var id = ""
     private let realm = try! Realm()
@@ -17,12 +18,9 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.barTintColor = .clear
-        navigationController?.navigationBar.backgroundColor = .clear
-        navigationController?.view.backgroundColor = .clear
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+        title = "Favorites"
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         favoriteManager.delegate = self
         tableView.delegate = self
@@ -42,11 +40,18 @@ class FavoritesViewController: UIViewController {
     
     @objc func loadFavorites() {
         if NetworkReachabilityManager()!.isReachable {
-            favorites.removeAll()
-            for i in realm.objects(Favorite.self) {
-                favoriteManager.fetchFavorite(with: i.id!)
+            if realm.objects(Favorite.self).isEmpty {
+                favorites.removeAll()
+                nothingLabel.isHidden = false
+                tableView.reloadData()
+            } else {
+                favorites.removeAll()
+                for i in realm.objects(Favorite.self) {
+                    favoriteManager.fetchFavorite(with: i.id!)
+                }
+                nothingLabel.isHidden = true
+                tableView.reloadData()
             }
-            tableView.reloadData()
         } else {
             SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
         }

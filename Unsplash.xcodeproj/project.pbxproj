@@ -18,7 +18,7 @@
 		3BBCF229282452B6003766A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BBCF227282452B6003766A0 /* Main.storyboard */; };
 		3BBCF22B282452B8003766A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BBCF22A282452B8003766A0 /* Assets.xcassets */; };
 		3BBCF22E282452B8003766A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BBCF22C282452B8003766A0 /* LaunchScreen.storyboard */; };
-		3BBCF23828245936003766A0 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBCF23728245936003766A0 /* PhotosViewController.swift */; };
+		3BBCF23828245936003766A0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBCF23728245936003766A0 /* HomeViewController.swift */; };
 		3BBCF23A2824594A003766A0 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBCF2392824594A003766A0 /* FavoritesViewController.swift */; };
 		3BBCF23C28245BBF003766A0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBCF23B28245BBF003766A0 /* Constants.swift */; };
 		3BBCF23E28245D65003766A0 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBCF23D28245D65003766A0 /* Photo.swift */; };
@@ -48,7 +48,7 @@
 		3BBCF22A282452B8003766A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BBCF22D282452B8003766A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BBCF22F282452B8003766A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3BBCF23728245936003766A0 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		3BBCF23728245936003766A0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3BBCF2392824594A003766A0 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		3BBCF23B28245BBF003766A0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3BBCF23D28245D65003766A0 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				3BBCF225282452B6003766A0 /* ViewController.swift */,
-				3BBCF23728245936003766A0 /* PhotosViewController.swift */,
+				3BBCF23728245936003766A0 /* HomeViewController.swift */,
 				3BBCF2392824594A003766A0 /* FavoritesViewController.swift */,
 				3BBCF24628248135003766A0 /* DetailViewController.swift */,
 			);
@@ -301,7 +301,7 @@
 				3BFD040128271B3A00E8CD27 /* PhotosManagerDelegate.swift in Sources */,
 				3BBCF226282452B6003766A0 /* ViewController.swift in Sources */,
 				3B405AC82827D88B00DE6328 /* DetailManagerDelegate.swift in Sources */,
-				3BBCF23828245936003766A0 /* PhotosViewController.swift in Sources */,
+				3BBCF23828245936003766A0 /* HomeViewController.swift in Sources */,
 				3BBCF222282452B6003766A0 /* AppDelegate.swift in Sources */,
 				3B405ACC2827E45300DE6328 /* FavoriteManagerDelegate.swift in Sources */,
 				3BBCF2422824675B003766A0 /* PhotoCell.swift in Sources */,

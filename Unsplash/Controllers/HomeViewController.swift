@@ -3,21 +3,31 @@ import Alamofire
 import SDWebImage
 import SPAlert
 
-class PhotosViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     
     private var id = ""
     private let refreshControl = UIRefreshControl()
     private var photosManager = PhotosManager()
     private var photos: [Photo] = []
+    
+    let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Home"
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        searchController.searchBar.tintColor = .label
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
         photosManager.delegate = self
-        searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 250
@@ -51,7 +61,7 @@ class PhotosViewController: UIViewController {
     }
 }
 
-extension PhotosViewController: PhotosManagerDelegate {
+extension HomeViewController: PhotosManagerDelegate {
     func didUpdatePhotos(_ photosManager: PhotosManager, _ photos: [Photo]) {
         self.photos = photos
         
@@ -65,7 +75,7 @@ extension PhotosViewController: PhotosManagerDelegate {
     }
 }
 
-extension PhotosViewController: UITableViewDataSource, UITableViewDelegate {
+extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photos.count
     }
@@ -100,29 +110,21 @@ extension PhotosViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension PhotosViewController: UISearchBarDelegate {
+extension HomeViewController: UISearchControllerDelegate, UISearchResultsUpdating {
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        
         if NetworkReachabilityManager()!.isReachable {
-            photosManager.fetchPhotos(search: searchBar.text!)
+            photosManager.fetchPhotos(search: text)
+            tableView.reloadData()
         } else {
             SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
         }
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            searchBar.resignFirstResponder()
-        }
     }
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.text?.count == 0 {
-            photosManager.fetchPhotos()
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                searchBar.resignFirstResponder()
-            }
-        }
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        photosManager.fetchPhotos()
+        tableView.reloadData()
     }
 }

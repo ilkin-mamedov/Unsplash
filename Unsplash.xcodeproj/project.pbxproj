@@ -89,6 +89,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		3B2E01482870F1CF003C5F8D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3BBCF2402824675B003766A0 /* PhotoCell.swift */,
+				3BBCF2412824675B003766A0 /* PhotoCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		3B2E01492870F1DA003C5F8D /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				3BBCF227282452B6003766A0 /* Main.storyboard */,
+				3BBCF22C282452B8003766A0 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		3BBCF215282452B6003766A0 = {
 			isa = PBXGroup;
 			children = (
@@ -113,12 +131,11 @@
 				3BBCF25428254783003766A0 /* Unsplash.entitlements */,
 				3BBCF221282452B6003766A0 /* AppDelegate.swift */,
 				3BBCF223282452B6003766A0 /* SceneDelegate.swift */,
+				3BBCF23B28245BBF003766A0 /* Constants.swift */,
 				3BFD040228273A6A00E8CD27 /* Managers */,
 				3BBCF23F28245D7B003766A0 /* Models */,
 				3BBCF2352824590B003766A0 /* Views */,
 				3BBCF23628245911003766A0 /* Controllers */,
-				3BBCF23B28245BBF003766A0 /* Constants.swift */,
-				3BBCF22C282452B8003766A0 /* LaunchScreen.storyboard */,
 				3BE693B9282AAE1C00E89C5B /* favorite.json */,
 				3BBCF22A282452B8003766A0 /* Assets.xcassets */,
 				3BBCF22F282452B8003766A0 /* Info.plist */,
@@ -129,9 +146,8 @@
 		3BBCF2352824590B003766A0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3BBCF227282452B6003766A0 /* Main.storyboard */,
-				3BBCF2402824675B003766A0 /* PhotoCell.swift */,
-				3BBCF2412824675B003766A0 /* PhotoCell.xib */,
+				3B2E01492870F1DA003C5F8D /* Storyboards */,
+				3B2E01482870F1CF003C5F8D /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";

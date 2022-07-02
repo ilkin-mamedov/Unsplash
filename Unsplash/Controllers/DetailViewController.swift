@@ -15,6 +15,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var createdLabel: UILabel!
     @IBOutlet weak var downloadsLabel: UILabel!
+    @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
     private var favoriteAnimationView: AnimationView?
@@ -26,19 +27,11 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userImageView.layer.cornerRadius = 25
-        userImageView.clipsToBounds = true
-        
-        detailManager.delegate = self
-        
-        detailManager.fetchDetail(with: id)
-        
         favoriteAnimationView = AnimationView(name: "favorite")
         favoriteAnimationView?.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         favoriteAnimationView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(favoritePressed)))
-        
         favoriteBarButton.customView = favoriteAnimationView
-    
+        
         if detailManager.isFavorited(with: id) {
             favoriteAnimationView?.animationSpeed = 3
             favoriteAnimationView?.play()
@@ -46,6 +39,23 @@ class DetailViewController: UIViewController {
             favoriteAnimationView?.play(fromFrame: 0, toFrame: 0.1, loopMode: .none, completion: nil)
         }
         
+        detailManager.delegate = self
+        detailManager.fetchDetail(with: id)
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradient.locations = [0.6, 1.0]
+        photoImageView.layer.insertSublayer(gradient, at: 0)
+        
+        
+        
+        userImageView.layer.cornerRadius = 25
+        userImageView.clipsToBounds = true
+        
+        downloadButton.layer.cornerRadius = 5
+        downloadButton.layer.borderWidth = 1.0
+        downloadButton.layer.borderColor = UIColor.white.cgColor
         indicatorView.isHidden = true
     }
     

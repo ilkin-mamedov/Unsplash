@@ -1,17 +1,17 @@
 import Foundation
 import Alamofire
 
-protocol FavoriteManagerDelegate {
-    func didUpdateFavorite(_ favoriteManager: FavoriteManager, _ favorite: Detail)
+protocol UserManagerDelegate {
+    func didUpdateUser(_ userManager: UserManager, _ user: User)
     func didFailWithError(_ error: Error)
 }
 
-struct FavoriteManager {
+struct UserManager {
     
-    var delegate: FavoriteManagerDelegate?
+    var delegate: UserManagerDelegate?
     
-    func fetchFavorite(with id: String) {
-        performRequest(with: "https://api.unsplash.com/photos/\(id)?client_id=\(K.ACCESS_KEY)")
+    func fetchUser(with username: String) {
+        performRequest(with: "https://api.unsplash.com/users/\(username)?client_id=\(K.ACCESS_KEY)")
     }
     
     func performRequest(with url: String) {
@@ -19,8 +19,8 @@ struct FavoriteManager {
             if let result = response.response {
                 if result.statusCode == 200 {
                     if let safeData = response.data {
-                        if let favorite = parseJSON(safeData) {
-                            delegate?.didUpdateFavorite(self, favorite)
+                        if let user = parseJSON(safeData) {
+                            delegate?.didUpdateUser(self, user)
                         }
                     }
                 }
@@ -28,15 +28,14 @@ struct FavoriteManager {
         }
     }
     
-    func parseJSON(_ data: Data) -> Detail? {
+    func parseJSON(_ data: Data) -> User? {
         let decoder = JSONDecoder()
         
         do {
-            return try decoder.decode(Detail.self, from: data)
+            return try decoder.decode(User.self, from: data)
         } catch {
             delegate?.didFailWithError(error)
             return nil
         }
     }
-    
 }

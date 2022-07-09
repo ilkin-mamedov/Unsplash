@@ -21,6 +21,7 @@ class DetailViewController: UIViewController {
     private var favoriteAnimationView: AnimationView?
     
     public var id = ""
+    private var username = ""
     private var downloadURL = ""
     private var detailManager = DetailManager()
 
@@ -48,15 +49,31 @@ class DetailViewController: UIViewController {
         gradient.locations = [0.6, 1.0]
         photoImageView.layer.insertSublayer(gradient, at: 0)
         
-        
-        
         userImageView.layer.cornerRadius = 25
         userImageView.clipsToBounds = true
+        userImageView.isUserInteractionEnabled = true
+        userImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showUser)))
         
         downloadButton.layer.cornerRadius = 5
         downloadButton.layer.borderWidth = 1.0
         downloadButton.layer.borderColor = UIColor.white.cgColor
         indicatorView.isHidden = true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showUser" {
+            let userViewController = segue.destination as! UserViewController
+
+            userViewController.username = username
+        }
+    }
+    
+    @objc func showUser() {
+        if NetworkReachabilityManager()!.isReachable {
+            performSegue(withIdentifier: "showUser", sender: self)
+        } else {
+            SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
+        }
     }
     
     @IBAction func favoriteBarButtonPressed(_ sender: UIBarButtonItem) {
@@ -132,6 +149,7 @@ extension DetailViewController: DetailManagerDelegate {
             self.createdLabel.text = "Created at \(detailManager.getDate(detail.created_at))"
             self.downloadsLabel.text = "Downloads: \(detail.downloads)"
             self.downloadURL = detail.links.download
+            self.username = detail.user.username
         }
     }
     

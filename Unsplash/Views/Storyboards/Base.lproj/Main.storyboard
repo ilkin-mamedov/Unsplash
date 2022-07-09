@@ -254,11 +254,44 @@
                         <outlet property="nameLabel" destination="9NC-Ot-yWM" id="lIr-TE-m25"/>
                         <outlet property="photoImageView" destination="buE-8S-GGk" id="jgS-uV-CCD"/>
                         <outlet property="userImageView" destination="Xfy-r4-uEy" id="ect-8K-51e"/>
+                        <segue destination="IbY-mu-DIm" kind="show" identifier="showUser" id="rlp-Kp-6QE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Z2-ki-zda" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-175.36231884057972" y="2864.7321428571427"/>
+        </scene>
+        <!--User View Controller-->
+        <scene sceneID="D4T-qN-fh6">
+            <objects>
+                <viewController id="IbY-mu-DIm" customClass="UserViewController" customModule="Unsplash" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VsY-SV-Nf3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V6G-t8-58T">
+                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1t1-Wx-TTC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="V6G-t8-58T" firstAttribute="top" secondItem="1t1-Wx-TTC" secondAttribute="top" id="5hh-tu-83R"/>
+                            <constraint firstAttribute="trailing" secondItem="V6G-t8-58T" secondAttribute="trailing" id="DMw-Cs-q8D"/>
+                            <constraint firstItem="V6G-t8-58T" firstAttribute="leading" secondItem="VsY-SV-Nf3" secondAttribute="leading" id="N9O-iO-Pw3"/>
+                            <constraint firstAttribute="bottom" secondItem="V6G-t8-58T" secondAttribute="bottom" id="dXU-0R-zDF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="hK9-zW-0yL"/>
+                    <connections>
+                        <outlet property="tableView" destination="V6G-t8-58T" id="FPr-kC-WX0"/>
+                        <segue destination="Sis-Bx-dRd" kind="presentation" identifier="showDetails" id="3hN-Sj-peX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r2U-Ua-hOe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-175.36231884057972" y="3611.3839285714284"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="S6e-7O-B0u">
@@ -337,7 +370,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="5Z1-27-r4w"/>
+        <segue reference="3hN-Sj-peX"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.down.circle" catalog="system" width="128" height="121"/>

@@ -1,20 +1,25 @@
 import Foundation
 import Alamofire
 
+protocol PhotosManagerDelegate {
+    func didUpdatePhotos(_ photosManager: PhotosManager, _ photos: [Photo])
+    func didFailWithError(_ error: Error)
+}
+
 struct PhotosManager {
     
     var delegate: PhotosManagerDelegate?
     
-    func fetchPhotos() {
-        for index in 1...10 {
-            performRequest(with: "https://api.unsplash.com/photos?per_page=30&page\(index)&client_id=\(K.ACCESS_KEY)")
-        }
+    func fetchPhotos(page: Int) {
+        performRequest(with: "https://api.unsplash.com/photos?per_page=30&page=\(page)&client_id=\(K.ACCESS_KEY)")
     }
     
-    func fetchPhotos(search: String) {
-        for index in 1...10 {
-            performRequest(with: "https://api.unsplash.com/search/photos?per_page=30&page\(index)&query=\(search.replacingOccurrences(of: " ", with: "+"))&client_id=\(K.ACCESS_KEY)")
-        }
+    func fetchPhotos(search: String, page: Int) {
+        performRequest(with: "https://api.unsplash.com/search/photos?per_page=30&page=\(page)&query=\(search.replacingOccurrences(of: " ", with: "+"))&client_id=\(K.ACCESS_KEY)")
+    }
+    
+    func fetchPhotos(with username: String, page: Int) {
+        performRequest(with: "https://api.unsplash.com/users/\(username)/photos?per_page=30&page=\(page)&client_id=\(K.ACCESS_KEY)")
     }
     
     func performRequest(with url: String) {

@@ -1,6 +1,6 @@
 import UIKit
 
-class PhotoCell: UITableViewCell {
+class PhotoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var photoImageView: UIImageView!

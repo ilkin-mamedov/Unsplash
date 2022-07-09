@@ -27,7 +27,7 @@ class FavoritesViewController: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = 250
         
-        tableView.register(UINib(nibName: "PhotoCell", bundle: nil), forCellReuseIdentifier: "photoCell")
+        tableView.register(UINib(nibName: "PhotoTableViewCell", bundle: nil), forCellReuseIdentifier: "PhotoTableViewCell")
         
         refreshControl.attributedTitle = NSAttributedString()
         refreshControl.addTarget(self, action: #selector(self.loadFavorites), for: .valueChanged)
@@ -89,7 +89,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath) as! PhotoCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoTableViewCell", for: indexPath) as! PhotoTableViewCell
         let favorite = favorites[indexPath.row]
         
         cell.photoImageView.sd_setImage(with: URL(string: favorite.urls.full))

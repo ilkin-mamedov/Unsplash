@@ -2,6 +2,11 @@ import Foundation
 import Alamofire
 import RealmSwift
 
+protocol DetailManagerDelegate {
+    func didUpdateDetail(_ detailManager: DetailManager, _ detail: Detail)
+    func didFailWithError(_ error: Error)
+}
+
 struct DetailManager {
     
     var delegate: DetailManagerDelegate?

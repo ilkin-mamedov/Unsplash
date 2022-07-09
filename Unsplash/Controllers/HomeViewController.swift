@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = 250
         
-        tableView.register(UINib(nibName: "PhotoCell", bundle: nil), forCellReuseIdentifier: "photoCell")
+        tableView.register(UINib(nibName: "PhotoTableViewCell", bundle: nil), forCellReuseIdentifier: "PhotoTableViewCell")
         
         refreshControl.attributedTitle = NSAttributedString()
         refreshControl.addTarget(self, action: #selector(self.loadPhotos), for: .valueChanged)
@@ -43,7 +43,7 @@ class HomeViewController: UIViewController {
     
     @objc func loadPhotos() {
         if NetworkReachabilityManager()!.isReachable {
-            photosManager.fetchPhotos()
+            photosManager.fetchPhotos(page: 1)
             tableView.reloadData()
         } else {
             SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
@@ -63,11 +63,8 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: PhotosManagerDelegate {
     func didUpdatePhotos(_ photosManager: PhotosManager, _ photos: [Photo]) {
-        self.photos = photos
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        self.photos.append(contentsOf: photos)
+        tableView.reloadData()
     }
     
     func didFailWithError(_ error: Error) {
@@ -81,8 +78,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath) as! PhotoCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoTableViewCell", for: indexPath) as! PhotoTableViewCell
         let photo = photos[indexPath.row]
         
         cell.photoImageView.sd_setImage(with: URL(string: photo.urls.full))
@@ -116,7 +112,7 @@ extension HomeViewController: UISearchControllerDelegate, UISearchResultsUpdatin
         guard let text = searchController.searchBar.text else { return }
         
         if NetworkReachabilityManager()!.isReachable {
-            photosManager.fetchPhotos(search: text)
+            photosManager.fetchPhotos(search: text, page: 1)
             tableView.reloadData()
         } else {
             SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
@@ -124,7 +120,7 @@ extension HomeViewController: UISearchControllerDelegate, UISearchResultsUpdatin
     }
     
     func didDismissSearchController(_ searchController: UISearchController) {
-        photosManager.fetchPhotos()
+        photosManager.fetchPhotos(page: 1)
         tableView.reloadData()
     }
 }

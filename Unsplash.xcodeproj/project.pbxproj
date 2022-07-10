@@ -33,7 +33,6 @@
 		3BBCF2492824875E003766A0 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBCF2482824875E003766A0 /* Detail.swift */; };
 		3BBCF24D2825261B003766A0 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBCF24C2825261B003766A0 /* Favorite.swift */; };
 		3BBCF250282543DB003766A0 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBCF24F282543DB003766A0 /* ExternalAccessory.framework */; };
-		3BE693BA282AAE1D00E89C5B /* favorite.json in Resources */ = {isa = PBXBuildFile; fileRef = 3BE693B9282AAE1C00E89C5B /* favorite.json */; };
 		3BFD03FF28271B2400E8CD27 /* PhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFD03FE28271B2400E8CD27 /* PhotosManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +66,6 @@
 		3BBCF24C2825261B003766A0 /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		3BBCF24F282543DB003766A0 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		3BBCF25428254783003766A0 /* Unsplash.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Unsplash.entitlements; sourceTree = "<group>"; };
-		3BE693B9282AAE1C00E89C5B /* favorite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = favorite.json; sourceTree = "<group>"; };
 		3BFD03FE28271B2400E8CD27 /* PhotosManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosManager.swift; sourceTree = "<group>"; };
 		3E1C1DAE97308E3BABB40DD6 /* Pods-Unsplash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unsplash.release.xcconfig"; path = "Target Support Files/Pods-Unsplash/Pods-Unsplash.release.xcconfig"; sourceTree = "<group>"; };
 		4ECEEC532A3D6F488DC7D8F6 /* Pods-Unsplash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unsplash.debug.xcconfig"; path = "Target Support Files/Pods-Unsplash/Pods-Unsplash.debug.xcconfig"; sourceTree = "<group>"; };
@@ -144,7 +142,6 @@
 				3BBCF23F28245D7B003766A0 /* Models */,
 				3BBCF2352824590B003766A0 /* Views */,
 				3BBCF23628245911003766A0 /* Controllers */,
-				3BE693B9282AAE1C00E89C5B /* favorite.json */,
 				3BBCF22A282452B8003766A0 /* Assets.xcassets */,
 				3BBCF22F282452B8003766A0 /* Info.plist */,
 			);
@@ -268,7 +265,6 @@
 				3BBCF2432824675B003766A0 /* PhotoTableViewCell.xib in Resources */,
 				3BBCF22E282452B8003766A0 /* LaunchScreen.storyboard in Resources */,
 				3BBCF22B282452B8003766A0 /* Assets.xcassets in Resources */,
-				3BE693BA282AAE1D00E89C5B /* favorite.json in Resources */,
 				3B244AA92879E6DC00ECFBDD /* UserTableViewCell.xib in Resources */,
 				3BBCF229282452B6003766A0 /* Main.storyboard in Resources */,
 			);

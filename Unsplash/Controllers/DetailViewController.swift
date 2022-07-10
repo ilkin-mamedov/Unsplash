@@ -1,15 +1,14 @@
 import UIKit
 import Alamofire
 import SDWebImage
-import Lottie
 import SPAlert
 
 var documentInteractionController: UIDocumentInteractionController!
 
 class DetailViewController: UIViewController {
     
-    @IBOutlet weak var favoriteBarButton: UIBarButtonItem!
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var topIndicator: UIView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -17,8 +16,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var downloadsLabel: UILabel!
     @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
-    
-    private var favoriteAnimationView: AnimationView?
+    @IBOutlet weak var favoriteButton: UIButton!
     
     public var id = ""
     private var username = ""
@@ -27,18 +25,6 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        favoriteAnimationView = AnimationView(name: "favorite")
-        favoriteAnimationView?.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        favoriteAnimationView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(favoritePressed)))
-        favoriteBarButton.customView = favoriteAnimationView
-        
-        if detailManager.isFavorited(with: id) {
-            favoriteAnimationView?.animationSpeed = 3
-            favoriteAnimationView?.play()
-        } else {
-            favoriteAnimationView?.play(fromFrame: 0, toFrame: 0.1, loopMode: .none, completion: nil)
-        }
         
         detailManager.delegate = self
         detailManager.fetchDetail(with: id)
@@ -49,6 +35,8 @@ class DetailViewController: UIViewController {
         gradient.locations = [0.6, 1.0]
         photoImageView.layer.insertSublayer(gradient, at: 0)
         
+        topIndicator.layer.cornerRadius = 2
+        
         userImageView.layer.cornerRadius = 25
         userImageView.clipsToBounds = true
         userImageView.isUserInteractionEnabled = true
@@ -58,6 +46,19 @@ class DetailViewController: UIViewController {
         downloadButton.layer.borderWidth = 1.0
         downloadButton.layer.borderColor = UIColor.white.cgColor
         indicatorView.isHidden = true
+        favoriteButton.layer.cornerRadius = 5
+        favoriteButton.layer.borderWidth = 1.0
+        favoriteButton.layer.borderColor = UIColor.white.cgColor
+        
+        if detailManager.isFavorited(with: id) {
+            favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favoriteButton.tintColor = UIColor.systemRed
+            favoriteButton.backgroundColor = UIColor.white
+        } else {
+            favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            favoriteButton.tintColor = UIColor.white
+            favoriteButton.backgroundColor = UIColor.clear
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -74,38 +75,6 @@ class DetailViewController: UIViewController {
         } else {
             SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
         }
-    }
-    
-    @IBAction func favoriteBarButtonPressed(_ sender: UIBarButtonItem) {
-        favoritePressed()
-    }
-    
-    @objc func favoritePressed() {
-        if detailManager.isFavorited(with: id) {
-            let alert = UIAlertController(title: "Are you sure you want to delete from favorites?", message: "", preferredStyle: .alert)
-            
-            alert.view.tintColor = UIColor(named: "AccentColor")
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in
-                alert.dismiss(animated: true)
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: {(_: UIAlertAction!) in
-                self.detailManager.deleteFromFavorites(with: self.id)
-                self.favoriteAnimationView?.play(fromFrame: 0, toFrame: 0.1, loopMode: .none, completion: nil)
-            }))
-            
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            favoriteAnimationView?.animationSpeed = 1.5
-            favoriteAnimationView?.play()
-            detailManager.addToFavorites(with: id)
-            SPAlert.present(title: "Added to Favorites", preset: .heart)
-        }
-    }
-    
-    @IBAction func closePressed(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
     }
     
     @IBAction func downloadPressed(_ sender: UIButton) {
@@ -133,6 +102,38 @@ class DetailViewController: UIViewController {
             SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
         }
     }
+    
+    @IBAction func favoritePressed(_ sender: UIButton) {
+        favoritePressed()
+    }
+    
+    @objc func favoritePressed() {
+        if detailManager.isFavorited(with: id) {
+            let alert = UIAlertController(title: "Are you sure you want to delete from favorites?", message: "", preferredStyle: .alert)
+            
+            alert.view.tintColor = UIColor(named: "AccentColor")
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in
+                alert.dismiss(animated: true)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: {(_: UIAlertAction!) in
+                self.detailManager.deleteFromFavorites(with: self.id)
+                self.favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                self.favoriteButton.tintColor = UIColor.white
+                self.favoriteButton.backgroundColor = UIColor.clear
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favoriteButton.tintColor = UIColor.systemRed
+            favoriteButton.backgroundColor = UIColor.white
+            detailManager.addToFavorites(with: id)
+            SPAlert.present(title: "Added to Favorites", preset: .heart)
+        }
+    }
+    
 }
 
 extension DetailViewController: DetailManagerDelegate {

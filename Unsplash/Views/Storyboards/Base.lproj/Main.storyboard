@@ -175,42 +175,78 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bG6-Dl-zmr">
                                 <rect key="frame" x="16" y="776" width="382" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inc-z7-p38">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hLs-Ww-Vsa">
+                                        <rect key="frame" x="0.0" y="0.0" width="324" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inc-z7-p38">
+                                                <rect key="frame" x="0.0" y="0.0" width="324" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="AA7-1z-wt8"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Download">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="Download"/>
+                                                    </attributedString>
+                                                </state>
+                                                <buttonConfiguration key="configuration" style="plain" title="Download"/>
+                                                <connections>
+                                                    <action selector="downloadPressed:" destination="lef-6W-Bta" eventType="touchUpInside" id="jUH-Po-sNI"/>
+                                                </connections>
+                                            </button>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="mpX-G8-r3i">
+                                                <rect key="frame" x="152" y="15" width="20" height="20"/>
+                                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </activityIndicatorView>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="AA7-1z-wt8"/>
+                                            <constraint firstItem="inc-z7-p38" firstAttribute="leading" secondItem="hLs-Ww-Vsa" secondAttribute="leading" id="A25-rS-Iax"/>
+                                            <constraint firstItem="mpX-G8-r3i" firstAttribute="centerY" secondItem="hLs-Ww-Vsa" secondAttribute="centerY" id="FZ3-Wa-nBz"/>
+                                            <constraint firstItem="inc-z7-p38" firstAttribute="top" secondItem="hLs-Ww-Vsa" secondAttribute="top" id="Za3-ox-Ubm"/>
+                                            <constraint firstAttribute="bottom" secondItem="inc-z7-p38" secondAttribute="bottom" id="ZpT-Ww-DBk"/>
+                                            <constraint firstItem="mpX-G8-r3i" firstAttribute="centerX" secondItem="hLs-Ww-Vsa" secondAttribute="centerX" id="jv0-Iz-Bs9"/>
+                                            <constraint firstAttribute="trailing" secondItem="inc-z7-p38" secondAttribute="trailing" id="kdw-3q-0AI"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Wn-ut-dhE">
+                                        <rect key="frame" x="332" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" priority="250" constant="50" id="rz4-aw-ZJq"/>
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Download">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="Download"/>
-                                            </attributedString>
-                                        </state>
-                                        <buttonConfiguration key="configuration" style="plain" title="Download"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system" title=""/>
                                         <connections>
-                                            <action selector="downloadPressed:" destination="lef-6W-Bta" eventType="touchUpInside" id="jUH-Po-sNI"/>
+                                            <action selector="favoritePressed:" destination="lef-6W-Bta" eventType="touchUpInside" id="bgG-xg-FJp"/>
                                         </connections>
                                     </button>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="mpX-G8-r3i">
-                                        <rect key="frame" x="181" y="15" width="20" height="20"/>
-                                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="inc-z7-p38" firstAttribute="leading" secondItem="bG6-Dl-zmr" secondAttribute="leading" id="OEz-7h-5zi"/>
+                                    <constraint firstItem="hLs-Ww-Vsa" firstAttribute="leading" secondItem="bG6-Dl-zmr" secondAttribute="leading" id="2c6-GT-6fS"/>
+                                    <constraint firstItem="5Wn-ut-dhE" firstAttribute="leading" secondItem="hLs-Ww-Vsa" secondAttribute="trailing" constant="8" id="3Lg-vd-hxV"/>
+                                    <constraint firstItem="hLs-Ww-Vsa" firstAttribute="top" secondItem="bG6-Dl-zmr" secondAttribute="top" id="Adl-F9-QVr"/>
+                                    <constraint firstAttribute="bottom" secondItem="hLs-Ww-Vsa" secondAttribute="bottom" id="FTG-bY-LEt"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Wn-ut-dhE" secondAttribute="bottom" id="Fhy-o0-D7u"/>
+                                    <constraint firstItem="5Wn-ut-dhE" firstAttribute="leading" secondItem="hLs-Ww-Vsa" secondAttribute="trailing" constant="8" id="Ksu-cu-a6v"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Wn-ut-dhE" secondAttribute="trailing" id="PbY-Ax-bSN"/>
                                     <constraint firstAttribute="height" constant="50" id="SkA-0Z-zUA"/>
-                                    <constraint firstItem="mpX-G8-r3i" firstAttribute="centerX" secondItem="bG6-Dl-zmr" secondAttribute="centerX" id="U8W-lG-rb0"/>
-                                    <constraint firstAttribute="bottom" secondItem="inc-z7-p38" secondAttribute="bottom" id="b15-em-Dny"/>
-                                    <constraint firstAttribute="trailing" secondItem="inc-z7-p38" secondAttribute="trailing" id="jp9-zU-6v4"/>
-                                    <constraint firstItem="mpX-G8-r3i" firstAttribute="centerY" secondItem="bG6-Dl-zmr" secondAttribute="centerY" id="mJH-Bs-gTu"/>
-                                    <constraint firstItem="inc-z7-p38" firstAttribute="top" secondItem="bG6-Dl-zmr" secondAttribute="top" id="vE8-rP-Zn2"/>
+                                    <constraint firstItem="5Wn-ut-dhE" firstAttribute="top" secondItem="bG6-Dl-zmr" secondAttribute="top" id="wSo-XY-lnW"/>
+                                </constraints>
+                            </view>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ZA-Hf-KdI">
+                                <rect key="frame" x="191" y="16" width="32" height="4"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="oYC-7A-IQs"/>
+                                    <constraint firstAttribute="height" constant="4" id="xh3-cT-y22"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="x5t-i0-bxr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="2ZA-Hf-KdI" firstAttribute="top" secondItem="VGe-Ot-q1L" secondAttribute="top" constant="16" id="1iN-4R-Sie"/>
                             <constraint firstItem="x5t-i0-bxr" firstAttribute="trailing" secondItem="RQx-8y-Dac" secondAttribute="trailing" constant="16" id="2Vs-c3-pyO"/>
                             <constraint firstItem="buE-8S-GGk" firstAttribute="top" secondItem="VGe-Ot-q1L" secondAttribute="top" id="BT5-4T-nI2"/>
                             <constraint firstAttribute="trailing" secondItem="buE-8S-GGk" secondAttribute="trailing" id="FiH-6L-NUs"/>
@@ -225,34 +261,23 @@
                             <constraint firstItem="buE-8S-GGk" firstAttribute="trailing" secondItem="x5t-i0-bxr" secondAttribute="trailing" id="cIY-r3-9Ed"/>
                             <constraint firstItem="bG6-Dl-zmr" firstAttribute="top" secondItem="RQx-8y-Dac" secondAttribute="bottom" constant="16" id="f93-hb-VC9"/>
                             <constraint firstItem="buE-8S-GGk" firstAttribute="leading" secondItem="x5t-i0-bxr" secondAttribute="leading" id="ihX-YU-j4A"/>
+                            <constraint firstItem="2ZA-Hf-KdI" firstAttribute="centerX" secondItem="VGe-Ot-q1L" secondAttribute="centerX" id="mE0-oO-b7e"/>
                             <constraint firstItem="RQx-8y-Dac" firstAttribute="leading" secondItem="x5t-i0-bxr" secondAttribute="leading" constant="16" id="pVF-OP-YEm"/>
                             <constraint firstItem="x5t-i0-bxr" firstAttribute="trailing" secondItem="bG6-Dl-zmr" secondAttribute="trailing" constant="16" id="vnK-NL-Bsu"/>
                             <constraint firstItem="buE-8S-GGk" firstAttribute="leading" secondItem="VGe-Ot-q1L" secondAttribute="leading" id="yQA-Cp-6R7"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="TI6-wT-oHH">
-                        <barButtonItem key="leftBarButtonItem" title="Close" image="chevron.down" catalog="system" landscapeImage="chevron.down" largeContentSizeImage="chevron.down" id="qHF-GN-SWK">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="closePressed:" destination="lef-6W-Bta" id="3HE-0e-yAH"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" id="VLH-Ro-Tdf">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="favoriteBarButtonPressed:" destination="lef-6W-Bta" id="t7y-D0-r9M"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="TI6-wT-oHH"/>
                     <connections>
                         <outlet property="createdLabel" destination="yJP-cl-Ix8" id="KVf-DX-Uio"/>
                         <outlet property="downloadButton" destination="inc-z7-p38" id="Hpy-Vb-6BA"/>
                         <outlet property="downloadsLabel" destination="CtJ-OY-UyT" id="9LG-DS-KkZ"/>
-                        <outlet property="favoriteBarButton" destination="VLH-Ro-Tdf" id="wsk-fu-hfA"/>
+                        <outlet property="favoriteButton" destination="5Wn-ut-dhE" id="6ye-J7-5tP"/>
                         <outlet property="indicatorView" destination="mpX-G8-r3i" id="7r2-q8-d7q"/>
                         <outlet property="locationLabel" destination="ngZ-oc-EYO" id="Y6J-iI-ym6"/>
                         <outlet property="nameLabel" destination="9NC-Ot-yWM" id="lIr-TE-m25"/>
                         <outlet property="photoImageView" destination="buE-8S-GGk" id="jgS-uV-CCD"/>
+                        <outlet property="topIndicator" destination="2ZA-Hf-KdI" id="gH2-4x-PUD"/>
                         <outlet property="userImageView" destination="Xfy-r4-uEy" id="ect-8K-51e"/>
                         <segue destination="IbY-mu-DIm" kind="show" identifier="showUser" id="rlp-Kp-6QE"/>
                     </connections>
@@ -270,7 +295,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V6G-t8-58T">
-                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="798"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -370,12 +395,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="rlp-Kp-6QE"/>
         <segue reference="3hN-Sj-peX"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.down.circle" catalog="system" width="128" height="121"/>
         <image name="calendar" catalog="system" width="128" height="106"/>
-        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <namedColor name="AccentColor">

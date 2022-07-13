@@ -10,15 +10,15 @@ struct PhotosManager {
     
     var delegate: PhotosManagerDelegate?
     
-    func fetchPhotos(page: Int) {
+    func fetchPhotos(page: Int = 1) {
         performRequest(with: "https://api.unsplash.com/photos?per_page=30&page=\(page)&client_id=\(K.ACCESS_KEY)")
     }
     
-    func fetchPhotos(search: String, page: Int) {
+    func fetchPhotos(search: String, page: Int = 1) {
         performRequest(with: "https://api.unsplash.com/search/photos?per_page=30&page=\(page)&query=\(search.replacingOccurrences(of: " ", with: "+"))&client_id=\(K.ACCESS_KEY)")
     }
     
-    func fetchPhotos(with username: String, page: Int) {
+    func fetchPhotos(with username: String, page: Int = 1) {
         performRequest(with: "https://api.unsplash.com/users/\(username)/photos?per_page=30&page=\(page)&client_id=\(K.ACCESS_KEY)")
     }
     

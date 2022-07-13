@@ -8,6 +8,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var id = ""
+    private var page = 1
     private let refreshControl = UIRefreshControl()
     private var photosManager = PhotosManager()
     private var photos: [Photo] = []
@@ -19,8 +20,6 @@ class HomeViewController: UIViewController {
         
         title = "Home"
         
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
         searchController.searchBar.tintColor = .label
         searchController.searchResultsUpdater = self
         searchController.delegate = self
@@ -30,9 +29,9 @@ class HomeViewController: UIViewController {
         photosManager.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 250
         
         tableView.register(UINib(nibName: "PhotoTableViewCell", bundle: nil), forCellReuseIdentifier: "PhotoTableViewCell")
+        tableView.register(UINib(nibName: "MoreTableViewCell", bundle: nil), forCellReuseIdentifier: "MoreTableViewCell")
         
         refreshControl.attributedTitle = NSAttributedString()
         refreshControl.addTarget(self, action: #selector(self.loadPhotos), for: .valueChanged)
@@ -43,7 +42,7 @@ class HomeViewController: UIViewController {
     
     @objc func loadPhotos() {
         if NetworkReachabilityManager()!.isReachable {
-            photosManager.fetchPhotos(page: 1)
+            photosManager.fetchPhotos()
             tableView.reloadData()
         } else {
             SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
@@ -73,36 +72,69 @@ extension HomeViewController: PhotosManagerDelegate {
 }
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return photos.count
+        if photos.isEmpty {
+            return 0
+        } else {
+            return section == 0 ? photos.count : 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoTableViewCell", for: indexPath) as! PhotoTableViewCell
-        let photo = photos[indexPath.row]
-        
-        cell.photoImageView.sd_setImage(with: URL(string: photo.urls.full))
-        cell.userImageView.sd_setImage(with: URL(string: photo.user.profile_image.large))
-        cell.nameLabel.text = photo.user.name
-        
-        cell.photoImageView.layer.sublayers?.removeAll()
-        let gradient = CAGradientLayer()
-        gradient.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width - 20, height: 250)
-        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradient.locations = [0.6, 1.0]
-        cell.photoImageView.layer.insertSublayer(gradient, at: 0)
-        
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoTableViewCell", for: indexPath) as! PhotoTableViewCell
+            let photo = photos[indexPath.row]
+            
+            cell.photoImageView.sd_setImage(with: URL(string: photo.urls.full))
+            cell.userImageView.sd_setImage(with: URL(string: photo.user.profile_image.large))
+            cell.nameLabel.text = photo.user.name
+            
+            cell.photoImageView.layer.sublayers?.removeAll()
+            let gradient = CAGradientLayer()
+            gradient.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width - 20, height: 250)
+            gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+            gradient.locations = [0.6, 1.0]
+            cell.photoImageView.layer.insertSublayer(gradient, at: 0)
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MoreTableViewCell", for: indexPath) as! MoreTableViewCell
+            
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if NetworkReachabilityManager()!.isReachable {
-            id = photos[indexPath.row].id
-            performSegue(withIdentifier: "showDetails", sender: self)
-        } else {
-            SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
+        if indexPath.section == 0 {
+            if NetworkReachabilityManager()!.isReachable {
+                id = photos[indexPath.row].id
+                performSegue(withIdentifier: "showDetails", sender: self)
+            } else {
+                SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
+            }
+        } else {            
+            if searchController.isActive {
+                photosManager.fetchPhotos(search: searchController.searchBar.text!, page: page)
+            } else {
+                photosManager.fetchPhotos(page: page)
+            }
+            tableView.reloadData()
+            tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
+        
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 250
+        } else {
+            return 44
+        }
     }
 }
 
@@ -111,16 +143,13 @@ extension HomeViewController: UISearchControllerDelegate, UISearchResultsUpdatin
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
         
-        if NetworkReachabilityManager()!.isReachable {
-            photosManager.fetchPhotos(search: text, page: 1)
-            tableView.reloadData()
-        } else {
-            SPAlert.present(title: "You are offline!", message: "Please, check your internet connection and try again.", preset: .error)
-        }
+        photos.removeAll()
+        photosManager.fetchPhotos(search: text)
+        tableView.reloadData()
     }
     
     func didDismissSearchController(_ searchController: UISearchController) {
-        photosManager.fetchPhotos(page: 1)
+        photosManager.fetchPhotos()
         tableView.reloadData()
     }
 }

@@ -27,7 +27,7 @@ class UserViewController: UIViewController {
         userManager.delegate = self
         userManager.fetchUser(with: username)
         photosManager.delegate = self
-        photosManager.fetchPhotos(with: username, page: 1)
+        photosManager.fetchPhotos(with: username)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

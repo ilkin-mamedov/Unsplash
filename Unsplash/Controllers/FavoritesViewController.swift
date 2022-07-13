@@ -20,8 +20,6 @@ class FavoritesViewController: UIViewController {
         
         title = "Favorites"
         
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
         favoriteManager.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
